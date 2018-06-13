@@ -2,8 +2,7 @@
 
 # Avro-handling
 
-
-Scripts que lidam com dados em serialização avro
+Scripts that handle data in avro serialization
 
 
 Avro provides:
