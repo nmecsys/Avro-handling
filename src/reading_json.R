@@ -28,7 +28,7 @@ read_jsonMaldito <- function(file=file){
       df <- rbind(df,df_aux)
     },error=function(cond){
       message(cond)
-      message("MALDITO AVRO")
+      message("Erro AVRO")
     })
   }
   nomes <- c("date","manchete","noticia","comentario","copyright","jornal","word_count")
