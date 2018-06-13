@@ -1,4 +1,8 @@
+![](https://avro.apache.org/images/avro-logo.png)
+
 # Avro-handling
+
+
 Scripts que lidam com dados em serialização avro
 
 
