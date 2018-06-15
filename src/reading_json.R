@@ -17,7 +17,8 @@ read_jsonMaldito <- function(file=file){
   for(i in 1:length(lines)){
     tryCatch({
       json <- fromJSON(lines[i])
-      df_aux <- data.frame(date=lubridate::date(json$publication_date),
+      
+      df_aux <- data.frame(date=json$publication_date,
                            manchete=json$snippet,
                            noticia=json$body,
                            comentario=json$title,
