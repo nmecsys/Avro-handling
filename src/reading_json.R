@@ -3,6 +3,7 @@ require(rjson)
 
 
 read_jsonMaldito <- function(file=file){
+  options(digits = 22)
   #con <- unz(filename = file, open="r",description = "")
   lines <- readLines(file, n = file.info(file)$size,
                      encoding = "UTF-8", warn = FALSE)
@@ -17,8 +18,9 @@ read_jsonMaldito <- function(file=file){
   for(i in 1:length(lines)){
     tryCatch({
       json <- fromJSON(lines[i])
-      
-      df_aux <- data.frame(date=json$publication_date,
+      aux = format(json$publication_date,digits = 22,scientific=FALSE)
+      aux2 = as.POSIXct(as.numeric(paste0(str_split(aux, "00")[[1]][1],"00")), origin="1970-01-01", tz="GMT")
+      df_aux <- data.frame(date=aux2,
                            manchete=json$snippet,
                            noticia=json$body,
                            comentario=json$title,
@@ -34,6 +36,7 @@ read_jsonMaldito <- function(file=file){
   }
   nomes <- c("date","manchete","noticia","comentario","copyright","jornal","word_count")
   names(df) <- nomes
+  df$date = as.Date(df$date)
   return(df)
 }
 
@@ -45,4 +48,7 @@ for(i in 1:length(arquivos)){
   df_aux = read_jsonMaldito(file = arquivos[i])
   df = rbind(df,df_aux)
 }
+
+
+
 
